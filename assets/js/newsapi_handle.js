@@ -1,6 +1,6 @@
 async function fetchNews(page, q, titles, language, date, date2, sort) {
     console.log('fetching');
-    var url = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?' +
+    var url = 'http://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?' +
         'q=' + q +
         '&searchIn=' + titles +
         '&language=' + language +
