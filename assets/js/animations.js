@@ -1,9 +1,5 @@
-
-
-
-    gsap.registerPlugin(ScrollTrigger);
-
-  
+gsap.registerPlugin(ScrollTrigger);
+if($('#menu-card-1').length){
     const tl = gsap.timeline({
     });
     tl.to('#menu-card-1', {
@@ -22,18 +18,17 @@
         duration: 0.5,
         opacity: 1
     });
-
-
-function draw_news_animation () {
+}
+function draw_news_animation() {
     gsap.fromTo('.anim', {
         opacity: 0,
         duration: 0.1,
         y: 300
     },
-     {
-        y: 0,
-        duration: 0.5,
-        opacity: 1
-    });
+        {
+            y: 0,
+            duration: 0.5,
+            opacity: 1
+        });
 }
 window.draw_news_animation = draw_news_animation;
