@@ -2,6 +2,12 @@
 .container {
 
 }
+body, html {
+    overflow-x: hidden;
+}
+div {
+    max-width: 100%;
+}
 .menu-card {
     border-radius: 60px;
     background: #938540f1;
