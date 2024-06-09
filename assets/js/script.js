@@ -3,12 +3,11 @@ $(document).ready(function () {
         const Id = $(this).attr("id");
         switch (Id) {
             case 'menu-card-1': {
-                console.log('1');
                 window.location.href = "./wiadomosci.html";
             }
                 break;
             case 'menu-card-2': {
-
+                window.location.href = "./nasa.html";
             }
                 break;
             case 'menu-card-3': {
