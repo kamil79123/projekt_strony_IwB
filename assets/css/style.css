@@ -96,13 +96,13 @@ select {
     border-radius: 5px;
     text-align: center;
     border: none;
-    background: #ffe5b43a;
+    background: #AFE1AF;
     border-bottom: 2px solid black;
 }
 
 #search-submit {
     height: calc(20px + 1vw + 1vh);
-    background: #FFE5B4;
+    background: #75cb75;
     transition: 0.5s all;
     color: black;
     font-weight: bold;
@@ -115,27 +115,27 @@ select {
     ;
     transition: 0.5s all;
     cursor: pointer;
-    background: #eecf90;
+    background: #41af41;
 }
 
 #search-keyword {
     height: calc(20px + 1vw + 1vh);
-    background: #ffe5b43a !important;
+    background: #AFE1AF !important;
 }
 
 #search-keyword:-webkit-autofill,
 #search-keyword:-moz-autofill {
-    background: #ffe5b43a !important;
+    background: #AFE1AF !important;
 }
 
 #search-keyword::selection {
-    background: #FFE5B4;
+    background: #AFE1AF;
 }
 
 .article-btn {
-    background: #FFE5B4 !important;
+    background: #AFE1AF !important;
     border: none;
-    color: rgba(0, 0, 0, 0.55);
+    color: rgba(0, 0, 0, 0.89);
     width: calc(25px + 20vh);
     transition: 0.5s all;
 }
@@ -143,7 +143,7 @@ select {
 .article-btn:hover {
     transition: 0.5s all;
     color: black !important;
-    background: #eecf90 !important;
+    background: #41af41 !important;
 }
 
 .back-to-menu {
