@@ -11,7 +11,7 @@ $(document).ready(function () {
             }
                 break;
             case 'menu-card-3': {
-
+                window.location.href = "./astro.html";
             }
                 break;
             case 'menu-card-4': {

@@ -13,10 +13,100 @@
 <body id="body-wiadomosci">
   <div class="container">
     <div class="row mt-3 text-center">
-      <a href="./index.html" class="mb-5 back-to-menu">Powrót do menu</a>
-      <div class="col-12">
-        <h1>Astronomy Picture of the Day</h1>
+      <div class="col-12 col-lg-3">
+        <a href="./index.html" class="mb-5 back-to-menu">Powrót do menu</a>
       </div>
+      <div class="col-12">
+        <h1>Aktualne położenie ISS</h1>
+      </div>
+      <div class="col-12 col-lg-6 offset-lg-3">
+        <div class="row">
+          <div class="col-12">
+            <div class="row rowA">
+              <div class="col-6">
+                Szerokość
+            </div>
+            <div class="col-6" id="lat">
+  
+            </div>
+            </div>
+          </div>
+        <div class="col-12">
+          <div class="row rowB">
+            <div class="col-6">
+              Długość
+          </div>
+          <div class="col-6" id="lon">
+
+          </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row rowA">
+            <div class="col-6">
+              Wysokość
+          </div>
+          <div class="col-6" id="alt">
+
+          </div>
+          </div>
+        </div>
+       <div class="col-12">
+        <div class="row rowB">
+          <div class="col-6">
+            Prędkość
+        </div>
+        <div class="col-6" id="vel">
+
+        </div>
+        </div>
+       </div>
+        <div class="col-12">
+          <div class="row rowA">
+            <div class="col-6">
+              Widoczność
+          </div>
+          <div class="col-6" id="vis">
+
+          </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row rowB">
+            <div class="col-6">
+              Strefa czasowa
+          </div>
+          <div class="col-6" id="tim">
+
+          </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row rowA">
+            <div class="col-6">
+              Państwo
+          </div>
+          <div class="col-6" id="cou">
+
+          </div>
+          </div>
+        </div>
+
+            <div class="col-12 my-5" id="map">
+                <h2>Aktualna lokalizacja na mapie</h2>
+                <iframe
+                id="ramka"
+                class="w-100"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="">
+              </iframe>
+            </div>
+        </div>
+      </div>
+
 
 
 
