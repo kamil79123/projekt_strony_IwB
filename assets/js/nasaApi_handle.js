@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h2>${data.title}</h2>
             <p>${data.explanation}</p>
             <p><a href="${data.url}" target="_blank">View Image</a></p>
-            <img src="${data.url}" alt="${data.title}">
+            <img src="${data.url}" alt="${data.title}" class="w-100">
             `
         );
     };
