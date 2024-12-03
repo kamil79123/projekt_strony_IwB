@@ -1,105 +1,30 @@
-/*function fetchNews(search, language, sort, published_after, search_fields) {
-    let requestOptions = {
-        method: 'GET'
-    };
-    let params = {
-        api_token: 'CxtOGu2ABnyrhuxbVNLsj0X1xzFePg4uOnJZXDUs',
-        search: search,
-        sort: sort,
-        language: language,
-        published_after: published_after,
-        search_fields: search_fields
-    };
-    let rezultat;
-    let esc = encodeURIComponent;
-    let query = Object.keys(params)
-        .map(function (k) { return esc(k) + '=' + esc(params[k]); })
-        .join('&');
-    console.log("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions);
-    fetch("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            rezultat = result;
-            let parsedResponse = JSON.parse(rezultat);
-            console.log(parsedResponse);
-            let data = parsedResponse.data;
-            let returnedValue = parsedResponse.meta.returned;
-            let str = '';
-            let row3 = document.getElementById('row-3');
-            for (let i = 0; i < returnedValue; i++) {
-                str = str + '<div class="col-10 offset-1 offset-lg-0 col-lg-4 anim flex my-3 text-center"> <div class="card"> <img src="' + data[i].image_url + '" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + parsedResponse.data[i].title + '</h5> <p class="card-text">' + parsedResponse.data[i].description + '</p> <div style="margin-top: 10vh"> <a href="' + parsedResponse.data[0].url + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>';
-                console.log(i);
-            }
-            row3.innerHTML = str;
-            draw_news_animation();
-        })
-        .catch(error => console.log('error', error));
-}*/
-
-/*function fetchNews(search, language, sort, published_after, search_fields) {
-    let requestOptions = {
-        method: 'GET'
-    };
-    let params = {
-        apikey: 'pub_5944662628c04af6fe1dfe8b857495abc442f',
-        q: search,
-        language: language
-    };
-    let rezultat;
-    let esc = encodeURIComponent;
-    let query = Object.keys(params)
-        .map(function (k) { return esc(k) + '=' + esc(params[k]); })
-        .join('&');
-    console.log("https://newsdata.io/api/1/news?" + query, requestOptions);
-    fetch("https://newsdata.io/api/1/news?" + query, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            rezultat = result;
-            let parsedResponse = JSON.parse(rezultat);
-            console.log("wynik: " + JSON.stringify(parsedResponse, null, 2));
-            let x = JSON.stringify(parsedResponse, null, 2);
-            const extractedData = x.results.map(article => {
-                return {
-                  title: article.title,
-                  imageUrl: article.image_url
-                };
-              });
-              
-              // Wyświetlenie wyniku w konsoli
-              console.log(extractedData);
-            console.log(parsedResponse);
-            let data = parsedResponse.data;
-            let returnedValue = parsedResponse.meta.returned;
-            let str = '';
-            let row3 = document.getElementById('row-3');
-            for (let i = 0; i < returnedValue; i++) {
-                str = str + '<div class="col-10 offset-1 offset-lg-0 col-lg-4 anim flex my-3 text-center"> <div class="card"> <img src="' + data[i].image_url + '" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + parsedResponse.data[i].description + '</h5> <p class="card-text">' + parsedResponse.data[i].link + '</p> <div style="margin-top: 10vh"> <a href="' + parsedResponse.data[0].link + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>';
-                console.log(i);
-            }
-            row3.innerHTML = str;
-            draw_news_animation();
-        })
-        .catch(error => console.log('error', error));
-} */
-
-        async function fetchNews(search, language, sort, published_after, search_fields) {
+        async function fetchNews(search, language, prioritydomain, search_fields, country, sort) {
             let str='';
-            
+            console.log("domain: " + prioritydomain);
             if ($('#search-titles').is(':checked')){
                 var params = {
                     apikey: 'pub_5944662628c04af6fe1dfe8b857495abc442f',
                     qInTitle: search,
-                    language: language
+                    language: language,
+                    prioritydomain: prioritydomain,
+                    country: country,
+                    image: '1',
+                    removeduplicate: '1'
                 };
             }
             else {
                 var params = {
                     apikey: 'pub_5944662628c04af6fe1dfe8b857495abc442f',
                     q: search,
-                    language: language
+                    language: language,
+                    prioritydomain: prioritydomain,
+                    country: country,
+                    image: '1',
+                    removeduplicate: '1'
                 };
             }
-            
+            console.log('country: ' + country);
+            console.log("language: " + language);
             let esc = encodeURIComponent;
             let query = Object.keys(params)
         .map(function (k) { return esc(k) + '=' + esc(params[k]); })
@@ -117,12 +42,31 @@
               }
       
               const data = await response.json();
-              let i=0;
-           console.log("odpowiedz: " + data.results);
+              let articles = data.results;
+              var i=0;
+           console.log("odpowiedz: " + articles);
+           console.log("new czy starszych: " + sort);
+              if(sort == 'new') {
+                articles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+                console.log("nowszych");
+              }
+              else {
+                articles.sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
+                console.log("starszych");
+              }
+         
+          
+           console.log(articles);
               // Iteracja po artykułach i generowanie HTML
-              for (let article of data.results) {
+              for (let article of articles) {
+                console.log('co tam siedzi: '+article.description);
                 i++;
-                str = str + '<div class="col-10 offset-1 offset-lg-0 col-lg-4 anim flex my-3 text-center"> <div class="card"> <img src="' + article.image_url + '" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + article.title + '</h5> <p class="card-text">' + article.description + '</p> <div style="margin-top: 10vh"> <a href="' + article.link + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>';
+                if(!article.description)
+                {
+                    article.description = 'Więcej treści po kliknięciu w link prowadzący do artykułu';
+                }
+                article.source_url = article.source_url.replace("https://", "");
+                str = str + '<div class="col-10 offset-1 offset-lg-0 col-lg-3 anim flex my-3 text-center"> <div class="card"> <img src="' + article.image_url + '" class="card-img-top" alt="..."><span class="category">'+ article.category+'</span><img class="icon" src="'+article.source_icon+'"><span class="country">'+article.country+', '+article.source_url+'</span><div class="card-body"> <h5 class="card-title">' + article.title + '</h5> <p class="card-text">' + article.description + '</p><p class="date mb-lg-5">'+article.pubDate+'</p><div style="margin-top: 5vh"><a href="' + article.link + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>';
                 // Dodanie wygenerowanego elementu do kontenera
                 console.log("i: " + i);
               }
@@ -131,6 +75,7 @@
               container.innerHTML = "<p>Nie udało się załadować artykułów. Spróbuj ponownie później.</p>";
             }
             container.innerHTML = str;
+            found.innerHTML = "Znaleziono " + i + " artykułów"; 
             draw_news_animation();
           }
       

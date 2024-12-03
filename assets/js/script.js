@@ -1,4 +1,28 @@
 $(document).ready(function () {
+var sort = 'new';
+
+    $('#new').click(function () {
+        if(sort != 'new')
+        {
+            $('#old').toggleClass('active');
+            $('#new').toggleClass('active');
+            sort = 'new';
+            szukaj(sort);
+        }
+       
+    });
+    $('#old').click(function () {
+        if(sort != 'old')
+        {
+            $('#new').toggleClass('active');
+            $('#old').toggleClass('active');
+            sort = 'old';
+            szukaj(sort);
+        }
+
+    });
+
+
     $(".menu-card").click(function () {
         const Id = $(this).attr("id");
         switch (Id) {
@@ -21,28 +45,34 @@ $(document).ready(function () {
         }
     });
     $("#search-submit").click(function () { // Wychwytujemy kliknięcie przycisku
-        let search = $('#search-keyword').val(); // Zmienna z zapytaniem
+         // Wywołujemy funkcję z tymi parametrami
+         szukaj(sort);
+    });
+});
+
+function szukaj (sort) {
+    let search = $('#search-keyword').val(); // Zmienna z zapytaniem
         let search_fields = 'title,main_text'; // Zmienna wskazująca, gdzie szukamy w artykule (np. tytuł, tekst itd.)
         if ($('#search-titles').is(':checked')) {
             search_fields = 'title'; // Jeśli checkbox zaznaczony to szukamy tylko w tytule
         }
-        let language = $('#search-language').val(); // Język wyszukiwania
+        let prioritydomain = 'low';
+        if ($('#search-prioritydomain').is(':checked')) {
+            prioritydomain = 'top';
+        }
+        const selectLanguage = document.getElementById('language');
+const selectedLanguage = Array.from(selectLanguage.selectedOptions);
+const language = selectedLanguage.map(option => option.value).join(',');
         let published_after = $('#search-date').val(); // Od kiedy wyszukujemy
-        let sort = $('#search-sort').val(); // Jak sortujemy wyniki
-        fetchNews(search, language, sort, published_after, search_fields); // Wywołujemy funkcję z tymi parametrami
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
-    let today = new Date();
-    let formattedToday = today.toISOString().split('T')[0];
-    let threeSixty = new Date();
-    threeSixty.setDate(today.getDate() - 360);
-    let formattedthreeSixty = threeSixty.toISOString().split('T')[0];
-    let maxDate = today.toISOString().split('T')[0];
-    let minDate = threeSixty.toISOString().split('T')[0];
-    let dateInput = document.getElementById('search-date');
-    let dateInput2 = document.getElementById('search-date-2');
-    dateInput.setAttribute('max', maxDate);
-    dateInput.setAttribute('min', minDate);
-    $('#search-date').val(formattedthreeSixty);
-});
+const selectCountry = document.getElementById('country');
+const selectedCountry = Array.from(selectCountry.selectedOptions);
+let country = selectedCountry.map(option => option.value).join(',');
+if (search != '' && selectedLanguage !='' && selectedCountry != '')
+{
+    console.log("selectedLanguage: " + selectedLanguage);
+    console.log("selectedCountry" + selectedCountry);
+        fetchNews(search, language, prioritydomain, search_fields, country, sort);
+}
+
+    
+}
