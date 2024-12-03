@@ -5,7 +5,6 @@
     let params = {
         api_token: 'CxtOGu2ABnyrhuxbVNLsj0X1xzFePg4uOnJZXDUs',
         search: search,
-        limit: 3, // Niestety tylko taki limit jest w darmowej wersji
         sort: sort,
         language: language,
         published_after: published_after,
