@@ -60,13 +60,14 @@
               // Iteracja po artykułach i generowanie HTML
               for (let article of articles) {
                 console.log('co tam siedzi: '+article.description);
+                console.log("Log article: " + article);
                 i++;
                 if(!article.description)
                 {
                     article.description = 'Więcej treści po kliknięciu w link prowadzący do artykułu';
                 }
                 article.source_url = article.source_url.replace("https://", "");
-                str = str + '<div class="col-10 offset-1 offset-lg-0 col-lg-3 anim flex my-3 text-center"> <div class="card"> <img src="' + article.image_url + '" class="card-img-top" alt="..."><span class="category">'+ article.category+'</span><img class="icon" src="'+article.source_icon+'"><span class="country">'+article.country+', '+article.source_url+'</span><div class="card-body"> <h5 class="card-title">' + article.title + '</h5> <p class="card-text">' + article.description + '</p><p class="date mb-lg-5">'+article.pubDate+'</p><div style="margin-top: 5vh"><a href="' + article.link + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>';
+                str = str + `<div class="col-10 offset-1 offset-lg-0 col-lg-3 anim flex my-3 text-center"> <div class="card"> <img src="' + article.image_url + '" class="card-img-top" alt="..."><span class="category">'+ article.category+'</span><img class="icon" src="'+article.source_icon+'"><span class="country">'+article.country+', '+article.source_url+'</span><div class="card-body"> <h5 class="card-title">' + article.title + '</h5> <p class="card-text">' + article.description + '</p><p class="date mb-lg-5">'+article.pubDate+'</p><div style="margin-top: 5vh"><a href="' + article.link + '" target="blank" class="position-absolute bottom-0 translate-middle article-btn btn btn-primary">Czytaj dalej</a></div> </div></div></div>`;
                 // Dodanie wygenerowanego elementu do kontenera
                 console.log("i: " + i);
               }
